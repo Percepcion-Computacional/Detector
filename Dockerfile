@@ -26,8 +26,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar el resto del código del proyecto al contenedor
 COPY . .
 
-# Exponer el puerto donde corre FastAPI
-EXPOSE 8000
+# Exponer el puerto por defecto de Cloud Run (8080)
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación en producción
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
