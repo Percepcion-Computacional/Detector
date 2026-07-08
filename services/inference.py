@@ -146,7 +146,15 @@ class WeaponDetector:
         for box in boxes:
             conf = float(box.conf[0])
             cls  = int(box.cls[0])
-            name = self.model.names[cls]
+            original_name = self.model.names[cls]
+            
+            # PARCHE: El modelo está invirtiendo las clases por dentro
+            name = original_name
+            if original_name == "weapon":
+                name = "person"
+            elif original_name == "person":
+                name = "weapon"
+
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             class_type = _classify_name(name)
             candidates.append({
